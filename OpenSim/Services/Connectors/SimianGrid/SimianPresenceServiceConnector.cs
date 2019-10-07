@@ -450,10 +450,15 @@ namespace OpenSim.Services.Connectors.SimianGrid
             return false;
         }
 
-        public GridUserInfo[] GetGridUserInfo(string[] userIDs)
+        public GridUserInfo[] GetGridUserInfo(string[] userIDs, bool update_name)
         {
             return new GridUserInfo[0];
          }
+
+        public bool SetDisplayName(string userID, string displayname)
+        {
+            throw new NotImplementedException();
+        }
         #endregion Helpers
     }
 }
