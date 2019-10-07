@@ -32,14 +32,14 @@ namespace OpenSim
         public const string VersionNumber = "0.9.1.1";
         public const string AssemblyVersionNumber = "0.9.1.1";
 
-        public const Flavour VERSION_FLAVOUR = Flavour.osC2_master_a7f300_200905_092319;
+        public const Flavour VERSION_FLAVOUR = Flavour.osC2DN_master_a7f300_200905_092319;
 
 
         public enum Flavour
         {
             Unknown,
-            osC2_Dev,
-	    osC2_master_a7f300_200905_092319,
+            osC2DN_Dev,
+	    osC2DN_master_a7f300_200905_092319,
             osC2_RC1,
             osC2_RC2,
             osC2_RC3,
@@ -60,7 +60,7 @@ namespace OpenSim
             return versionString.PadRight(VERSIONINFO_VERSION_LENGTH);
         }
 
-        public const int VERSIONINFO_VERSION_LENGTH = 75;
+        public const int VERSIONINFO_VERSION_LENGTH = 78;
 
         /// <value>
         /// This is the external interface version.  It is separate from the OpenSimulator project version.
