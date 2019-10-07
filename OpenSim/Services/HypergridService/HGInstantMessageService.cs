@@ -70,7 +70,6 @@ namespace OpenSim.Services.HypergridService
 
         private static bool m_ForwardOfflineGroupMessages;
         private static bool m_InGatekeeper;
-        private string m_messageKey;
 
         public HGInstantMessageService(IConfigSource config)
             : this(config, null)
@@ -119,7 +118,6 @@ namespace OpenSim.Services.HypergridService
                     return;
                 }
 
-                m_messageKey = cnf.GetString("MessageKey", String.Empty);
                 m_ForwardOfflineGroupMessages = cnf.GetBoolean("ForwardOfflineGroupMessages", false);
 
                 if (m_InGatekeeper)
@@ -284,7 +282,7 @@ namespace OpenSim.Services.HypergridService
 
             if (reginfo != null)
             {
-                imresult = InstantMessageServiceConnector.SendInstantMessage(reginfo.ServerURI, im, m_messageKey);
+                imresult = InstantMessageServiceConnector.SendInstantMessage(reginfo.ServerURI, im);
             }
             else
             {
@@ -323,7 +321,7 @@ namespace OpenSim.Services.HypergridService
 
         bool ForwardIMToGrid(string url, GridInstantMessage im, UUID toAgentID, bool foreigner)
         {
-            if (InstantMessageServiceConnector.SendInstantMessage(url, im, m_messageKey))
+            if (InstantMessageServiceConnector.SendInstantMessage(url, im))
             {
                 // IM delivery successful, so store the Agent's location in our local cache.
                 lock (m_UserLocationMap)

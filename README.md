@@ -1,41 +1,58 @@
-# osCore2 Fork by Bill Blight of Opensim.life
+# osCore2 Fork of the [Opensimulator](http://opensimulator.org) Project
+## with support from Mobius Grid, and Stolen Ruby
+
 
 ### USE AT YOUR OWN RISK!!
 
 Minimal support is offered for this project at this time, it is a labor of love, and should be not used for production environments unless you are really sure what you are doing.
 
 ### USE AT YOUR OWN RISK!!
+This is our public version of Mobius. Features will be added here once they reach a relatively stable stage in their development.
 
+Features will be developed on their own branches that are based on master until they are ready for beta. Small patches and changes will go straight to beta. The beta branch will always be up-to-date with master. Once the beta branch is stable it will be remerged into master. In short, master is the stable release, but beta will have more stuff.
 
-# Contains the Yengine(formerly XMR) script engine, Xengine still default
+## osCore2 .0.5 Alpha with DisplayName support.
+### Release Notes supplied by Stolen Ruby
+\+ New Region Restart Notification   
+\+ LSLSyntax Module   
+\+ ViewerAsset Module   
+\+ External AvatarPickerSearch Handler   
+\+ Port range settings on simulators   
+\+ Option to have the region's port match the port of the sim   
+\* Merge with osCore2 (2766eef)
 
-XMR script engine Donated to Opensimulator core by, mrieker (DreamNation) and Cores own Melanie.
+ - The matching port setting will only work for one region per simulator.
+ - A PHP handler for AvatarPickerSearch and ViewerAsset will be included in OSAWS.
+ - I had to remove core's implementation of LSLSyntax and ViewerAsset.
+ - The region restart plugin has been changed to take the amount of time until a restart instead of a list. The RemoteAdminPlugin has been changed to match this behaviour.
+ - To make a region use the same port as the simulator, set its `InternalPort` to `MATCHING` in the ini.
 
-Notes on Yengine: Although it works very well, it is not compatible with Xengine, meaing crossing or TP'ing into an Yengine region from a Xengine region will result in scripts being reset and may need recompiled.
+\+ New ROBUST service to provide display names more efficiently  
+\* `FetchDisplayNamesInterval` is now `DisplayNamesCacheExpirationInHours` with a default value of 12   
+\* HG display name updates are now sorted by their home grid and a single request is made to each grid
 
-## BULLETSIM IS REMOVED FROM THIS FORK!!!
+ - Don't forget to add the HGDisplayNameServiceConnector to your ROBUST config so other grids can fetch your display names!
 
-## Jopensim support included
+\+ Display Names  
+\+ Option to hide the last name Resident  
+\+ No last name login for users with the lastname Resident  
 
-I have included the source which will build the Jopensim Profile and Search moduals.
-There is no documetation on configuring them included at this point
-please see http://jopensim.com for details.
+ - Only the MySQL parts of Display Names is coded so far.
+ - The `CharSet=utf8mb4;` specified in the MySQL ConnectionStrings of UserAccountService and GridUserService is required.
+ - Fetch Display Names still needs work as it's not grouping requests properly, and the timeout is far too big.
+ - LSL Display Name functions have only been updated in YEngine.
+ - Name Tags will appear to the user as they would appear on the user's home grid.
+ - Trying out a thing where where HG usernames are displayed as `first.last@grid.url.com` instead of `first.last.@grid.url.com` for nametags. This doesn't affect how it is formatted in other places.
+ - Also trying a thing where HG visitors will have their proper name as their display name if they don't already have a display name.
+ - The 7 day wait for changing your display name is hardcoded at the moment as the viewer will always say 7 days.
+ - Display names of HG visitors are updated when they arrive.
 
-### You will need to remove these modules if you don't plan on using them, as it will cause errors.
+- [JOpenSim](http://jopensim.com) is included by default
+- [phpmutelist](https://github.com/kcozens/OpenSimMutelist) is included by default
+- YEngine (formerly XMR) is included and is the default script engine
+- Bulletsim has been removed and UbODE is the default physics engine
 
-This has some fixes that have not made it into core OpenSimulator .
-
-Some of the additions include the http tests branch which improves the built in http server.
-Roll back of some of the permission changes , specifcally the item creation permsions for textures.
-configureable LSL delays, see OpenSimDefaults.ini, added osParcelMusicURL, for gods, as the ll funcion only works for parcel/land owners.
-
-This build also includes the phpmutelist found at https://github.com/kcozens/OpenSimMutelist
-
-And various others.
-
-Welcome to OpenSim!
-
-# Overview
+# OpenSim Overview
 
 OpenSim is a BSD Licensed Open Source project to develop a functioning
 virtual worlds server platform capable of supporting multiple clients
@@ -133,4 +150,4 @@ one you set up using the "create user" command.
 
 ### Bug reports
 
-email grid@opensim.life
+email grid@ourgrid.life

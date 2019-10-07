@@ -73,7 +73,6 @@ namespace OpenSim.Services.HypergridService
         private static Uri m_Uri;
         private static GridRegion m_DefaultGatewayRegion;
         private bool m_allowDuplicatePresences = false;
-        private static string m_messageKey;
 
         public GatekeeperService(IConfigSource config, ISimulationService simService)
         {
@@ -155,9 +154,6 @@ namespace OpenSim.Services.HypergridService
                     m_allowDuplicatePresences = presenceConfig.GetBoolean("AllowDuplicatePresences", m_allowDuplicatePresences);
                 }
 
-                IConfig messagingConfig = config.Configs["Messaging"];
-                if (messagingConfig != null)
-                    m_messageKey = messagingConfig.GetString("MessageKey", String.Empty);
                 m_log.Debug("[GATEKEEPER SERVICE]: Starting...");
             }
         }
@@ -470,6 +466,7 @@ namespace OpenSim.Services.HypergridService
             {
                 aCircuit.firstname = account.FirstName;
                 aCircuit.lastname = account.LastName;
+                aCircuit.displayname = account.DisplayName;
             }
             if (account == null)
             {
@@ -527,6 +524,17 @@ namespace OpenSim.Services.HypergridService
 
                     userId += ";" + aCircuit.ServiceURLs["HomeURI"] + ";" + first + " " + last;
                     m_GridUserService.LoggedIn(userId);
+
+                    if (aCircuit.hasDisplayName)
+					{
+						m_log.InfoFormat("[GATEKEEPER SERVICE]: {0} {1} has arrived with a display name -> {2}", aCircuit.firstname, aCircuit.lastname, aCircuit.displayname);
+                        m_GridUserService.SetDisplayName(userId, aCircuit.displayname);
+					}
+                    else
+                    {
+                        // todo: maybe have it retrieve it?
+                        m_log.InfoFormat("[GATEKEEPER SERVICE]: {0} {1} has arrived without a display name in the circuit.", aCircuit.firstname, aCircuit.lastname);
+                    }
                 }
             }
 
@@ -655,7 +663,7 @@ namespace OpenSim.Services.HypergridService
             msg.Position = Vector3.Zero;
             msg.RegionID = scopeID.Guid;
             msg.binaryBucket = new byte[1] {0};
-            InstantMessageServiceConnector.SendInstantMessage(regURL,msg, m_messageKey);
+            InstantMessageServiceConnector.SendInstantMessage(regURL,msg);
 
             m_GridUserService.LoggedOut(agentID.ToString(),
                 UUID.Zero, guinfo.LastRegionID, guinfo.LastPosition, guinfo.LastLookAt);

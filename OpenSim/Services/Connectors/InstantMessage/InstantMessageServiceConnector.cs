@@ -50,9 +50,9 @@ namespace OpenSim.Services.Connectors.InstantMessage
         /// <param name="url">URL we pull the data out of to send the request to</param>
         /// <param name="im">The Instant Message </param>
         /// <returns>Bool if the message was successfully delivered at the other side.</returns>
-        public static bool SendInstantMessage(string url, GridInstantMessage im, string messageKey)
+        public static bool SendInstantMessage(string url, GridInstantMessage im)
         {
-            Hashtable xmlrpcdata = ConvertGridInstantMessageToXMLRPC(im, messageKey);
+            Hashtable xmlrpcdata = ConvertGridInstantMessageToXMLRPC(im);
             xmlrpcdata["region_handle"] = 0;
 
             ArrayList SendParams = new ArrayList();
@@ -97,7 +97,7 @@ namespace OpenSim.Services.Connectors.InstantMessage
         /// </summary>
         /// <param name="msg">The GridInstantMessage object</param>
         /// <returns>Hashtable containing the XMLRPC request</returns>
-        protected static Hashtable ConvertGridInstantMessageToXMLRPC(GridInstantMessage msg, string messageKey)
+        protected static Hashtable ConvertGridInstantMessageToXMLRPC(GridInstantMessage msg)
         {
             Hashtable gim = new Hashtable();
             gim["from_agent_id"] = msg.fromAgentID.ToString();
@@ -124,9 +124,6 @@ namespace OpenSim.Services.Connectors.InstantMessage
             gim["region_id"] = msg.RegionID.ToString();
             gim["binary_bucket"] = Convert.ToBase64String(msg.binaryBucket, Base64FormattingOptions.None);
             gim["region_id"] = new UUID(msg.RegionID).ToString();
-
-            if (messageKey != String.Empty)
-                gim["message_key"] = messageKey;
 
             return gim;
         }

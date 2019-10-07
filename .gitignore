@@ -12,6 +12,9 @@ Robust32.vshost.exe
 Robust32.exe
 *.sln
 *.build
-*.orig
-*.swp
-*.cache
+OpenSim32.exe
+pCampBot.exe
+OpenSim.ConsoleClient.exe
+OpenSim.Tools.lslc.exe
+OpenSim.Tests.Clients.AssetClient.exe
+*.pdb

@@ -227,9 +227,8 @@ namespace OpenSim.Server.Base
             // The path for a dynamic plugin will contain ":" on Windows
             string[] parts = dllName.Split (new char[] {':'});
 
-            if (parts.Length < 3)
+            if (parts [0].Length > 1)
             {
-                // Linux. There will be ':' but the one we're looking for
                 dllName = parts [0];
                 if (parts.Length > 1)
                     className = parts[1];

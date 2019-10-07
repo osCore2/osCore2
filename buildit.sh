@@ -12,6 +12,8 @@ find . -name "*.orig" -type f -print0 | xargs -0 /bin/rm -f
 find . -name "*.pdb" -type f -print0 | xargs -0 /bin/rm -f
 find . -name "*.mdb" -type f -print0 | xargs -0 /bin/rm -f
 find . -name "*.bak" -type f -print0 | xargs -0 /bin/rm -f
+find . -name "*.obj" -type f -print0 | xargs -0 /bin/rm -f
+find . -name "obj" -type d -print0 | xargs -0 /bin/rm -rf
 echo "Running Prebuild"
 ./runprebuild.sh
 
