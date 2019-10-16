@@ -230,8 +230,9 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
                     break;
                 }
             try
-                    PSTTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");            
-	   
+	    { 
+		    PSTTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");            
+	  
                 }
                 catch
                 {
