@@ -495,7 +495,7 @@ namespace OpenSim.Services.UserAccountService
             UserAccount account = GetUserAccount(UUID.Zero, firstName, lastName);
             if (account == null)
             {
-                MainConsole.Instance.Output("No such user as {0} {1}", null, firstName, lastName);
+                MainConsole.Instance.Output("No such user as {0} {1}", firstName, lastName);
                 return;
             }
 
@@ -504,9 +504,9 @@ namespace OpenSim.Services.UserAccountService
                 success = m_AuthenticationService.SetPassword(account.PrincipalID, newPassword);
 
             if (!success)
-                MainConsole.Instance.Output("Unable to reset password for account {0} {1}.", null, firstName, lastName);
+                MainConsole.Instance.Output("Unable to reset password for account {0} {1}.", firstName, lastName);
             else
-                MainConsole.Instance.Output("Password reset for user {0} {1}", null, firstName, lastName);
+                MainConsole.Instance.Output("Password reset for user {0} {1}", firstName, lastName);
         }
 
         protected void HandleResetUserEmail(string module, string[] cmdparams)
@@ -530,7 +530,7 @@ namespace OpenSim.Services.UserAccountService
             UserAccount account = GetUserAccount(UUID.Zero, firstName, lastName);
             if (account == null)
             {
-                MainConsole.Instance.Output("No such user as {0} {1}", null, firstName, lastName);
+                MainConsole.Instance.Output("No such user as {0} {1}", firstName, lastName);
                 return;
             }
 
@@ -540,9 +540,9 @@ namespace OpenSim.Services.UserAccountService
 
             success = StoreUserAccount(account);
             if (!success)
-                MainConsole.Instance.Output("Unable to set Email for account {0} {1}.", null, firstName, lastName);
+                MainConsole.Instance.Output("Unable to set Email for account {0} {1}.", firstName, lastName);
             else
-                MainConsole.Instance.Output("User Email set for user {0} {1} to {2}", null, firstName, lastName, account.Email);
+                MainConsole.Instance.Output("User Email set for user {0} {1} to {2}", firstName, lastName, account.Email);
         }
 
 
@@ -580,9 +580,9 @@ namespace OpenSim.Services.UserAccountService
 
             bool success = StoreUserAccount(account);
             if (!success)
-                MainConsole.Instance.Output("Unable to set user level for account {0} {1}.", null, firstName, lastName);
+                MainConsole.Instance.Output("Unable to set user level for account {0} {1}.", firstName, lastName);
             else
-                MainConsole.Instance.Output("User level set for user {0} {1} to {2}", null, firstName, lastName, level);
+                MainConsole.Instance.Output("User level set for user {0} {1} to {2}", firstName, lastName, level);
         }
 
 		protected void HandleSetUserDisplayName(string module, string[] cmdparams)
