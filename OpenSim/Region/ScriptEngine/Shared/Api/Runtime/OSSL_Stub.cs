@@ -1428,5 +1428,10 @@ namespace OpenSim.Region.ScriptEngine.Shared.ScriptBase
         {
             return m_OSSL_Functions.osIsNotValidNumber(v);
         }
+
+        public LSL_Integer osPerm2Use(string name) //returns true(1) if the permissions allow you to call named function
+        {
+            return m_OSSL_Functions.osPerm2Use(name);
+        }
     }
 }
