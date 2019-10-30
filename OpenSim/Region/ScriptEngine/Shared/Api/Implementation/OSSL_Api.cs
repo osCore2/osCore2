@@ -5734,7 +5734,7 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
         }
                                     //return reason true(1) if an OSSL vunction (by string name) can be called
                                    //without generating a permission error. else returns false(0)
-        public LSL_Integer osPermissionToCall(string function) //return false(0) if the named OSSL function cannot be called
+        public LSL_Integer osPerm2Use(string function) //return false(0) if the named OSSL function cannot be called
         {                                                     //always returns false for any function managed by Thret Level
             m_host.AddScriptLPS(1);
             if (!m_OSFunctionsEnabled)          //if all OSSL functins are disabled,
