@@ -92,7 +92,7 @@ namespace OpenSim.Services.LLLoginService
         protected string m_MessageUrl;
         protected string m_DSTZone;
         protected bool m_allowDuplicatePresences = false;
-        protected bool string m_messageKey;
+        protected string m_messageKey;
         protected string m_TOS_URL;
         protected int m_TOS_Date;       	
 
